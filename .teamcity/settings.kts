@@ -31,7 +31,7 @@ version = "2023.05"
 
 project {
 
-    vcsRoot(HttpsGithubComConsole6500teamcityCiCdGitRefsHeadsMain)
+    vcsRoot(vcsConfiguration)
 
     buildType(Build)
 
@@ -64,7 +64,7 @@ object Build : BuildType({
     }
 
     vcs {
-        root(HttpsGithubComConsole6500teamcityCiCdGitRefsHeadsMain)
+        root(vcsConfiguration)
     }
 
     steps {
@@ -130,9 +130,9 @@ object Build : BuildType({
     }
 })
 
-object HttpsGithubComConsole6500teamcityCiCdGitRefsHeadsMain : GitVcsRoot({
-    name = "https://github.com/console6500/teamcity-ci-cd.git#refs/heads/main"
-    url = "https://github.com/console6500/teamcity-ci-cd.git"
+object vcsConfiguration : GitVcsRoot({
+    name = "https://github.com/console6500/test-teamcity-import.git#refs/heads/main"
+    url = "https://github.com/console6500/test-teamcity-import.git"
     branch = "refs/heads/main"
     branchSpec = "refs/heads/*"
 })
