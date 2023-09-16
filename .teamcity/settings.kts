@@ -31,8 +31,6 @@ version = "2023.05"
 
 project {
 
-    vcsRoot(vcsConfiguration)
-
     buildType(Build)
 
     features {
@@ -61,10 +59,6 @@ object Build : BuildType({
         param("env.AWS_DEFAULT_REGION", "us-east-2")
         param("env.STAGING_URL", "https://nphukndnle4gm37v3bffyhdvri0dvzaz.lambda-url.us-east-2.on.aws/")
         param("env.PRODUCTION_FUNCTION_NAME", "sample-application-production")
-    }
-
-    vcs {
-        root(vcsConfiguration)
     }
 
     steps {
@@ -128,11 +122,4 @@ object Build : BuildType({
         perfmon {
         }
     }
-})
-
-object vcsConfiguration : GitVcsRoot({
-    name = "https://github.com/console6500/test-teamcity-import.git#refs/heads/main"
-    url = "https://github.com/console6500/test-teamcity-import.git"
-    branch = "refs/heads/main"
-    branchSpec = "refs/heads/*"
 })
