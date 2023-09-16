@@ -45,20 +45,20 @@ project {
 
 object Build : BuildType({
     name = "Build"
-
     enablePersonalBuilds = false
     artifactRules = "+:lambda.zip"
     maxRunningBuilds = 1
     publishArtifacts = PublishMode.SUCCESSFUL
 
+    // please configure the password parameters manually in the TeamCity UI
     params {
-        param("env.PRODUCTION_URL", "https://x2kwlkaff4pjobsjjtgl4ssdce0ceiof.lambda-url.us-east-2.on.aws/")
-        param("env.STAGING_FUNCTION_NAME", "sample-application-staging")
-        password("env.AWS_SECRET_ACCESS_KEY", "zxx629b65f16af5fd36e7d99513393750879f34b2c3a8513227b4686d3ed0e0d6f2c4081c41e0319c24775d03cbe80d301b", display = ParameterDisplay.HIDDEN, readOnly = true)
-        password("env.AWS_ACCESS_KEY_ID", "zxx4d0e7d7c22921af9ea5cf855dc00d5344585f1e1d76bb021", display = ParameterDisplay.HIDDEN, readOnly = true)
-        param("env.AWS_DEFAULT_REGION", "us-east-2")
-        param("env.STAGING_URL", "https://nphukndnle4gm37v3bffyhdvri0dvzaz.lambda-url.us-east-2.on.aws/")
-        param("env.PRODUCTION_FUNCTION_NAME", "sample-application-production")
+        password("env.AWS_SECRET_ACCESS_KEY", "reference", display = ParameterDisplay.HIDDEN, readOnly = true)
+        password("env.AWS_ACCESS_KEY_ID", "reference", display = ParameterDisplay.HIDDEN, readOnly = true)
+        param("env.AWS_DEFAULT_REGION", "UPDATE_THIS_VALUE")
+        param("env.STAGING_FUNCTION_NAME", "UPDATE_THIS_VALUE")
+        param("env.STAGING_URL", "UPDATE_THIS_VALUE")
+        param("env.PRODUCTION_FUNCTION_NAME", "UPDATE_THIS_VALUE")
+        param("env.PRODUCTION_URL", "UPDATE_THIS_VALUE")
     }
 
     steps {
@@ -110,16 +110,6 @@ object Build : BuildType({
         script {
             name = "Test Production"
             scriptContent = "make testdeployment URL=${'$'}{PRODUCTION_URL}"
-        }
-    }
-
-    triggers {
-        vcs {
-        }
-    }
-
-    features {
-        perfmon {
         }
     }
 })
