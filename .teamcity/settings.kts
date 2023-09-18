@@ -87,7 +87,6 @@ object Build : BuildType({
             name = "Deploy Staging"
             scriptContent = """
                 make deploy \
-                	ENVIRONMENT="Staging" \
                 	PLATFORM="TeamCity" \
                     FUNCTION=${'$'}{STAGING_FUNCTION_NAME} \
                     VERSION=${'$'}{BUILD_VCS_NUMBER} \
@@ -96,13 +95,12 @@ object Build : BuildType({
         }
         script {
             name = "Test Staging"
-            scriptContent = "make testdeployment URL=${'$'}{STAGING_URL}"
+            scriptContent = "make testdeployment URL=${'$'}{STAGING_URL} VERSION=${'$'}{BUILD_VCS_NUMBER}"
         }
         script {
             name = "Deploy Production"
             scriptContent = """
                 make deploy \
-                	ENVIRONMENT="Production" \
                 	PLATFORM="TeamCity" \
                     FUNCTION=${'$'}{PRODUCTION_FUNCTION_NAME} \
                     VERSION=${'$'}{BUILD_VCS_NUMBER} \
@@ -111,7 +109,7 @@ object Build : BuildType({
         }
         script {
             name = "Test Production"
-            scriptContent = "make testdeployment URL=${'$'}{PRODUCTION_URL}"
+            scriptContent = "make testdeployment URL=${'$'}{PRODUCTION_URL} VERSION=${'$'}{BUILD_VCS_NUMBER}"
         }
     }
 })
